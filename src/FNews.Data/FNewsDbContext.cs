@@ -21,6 +21,8 @@ namespace FNews.Data
 
         public DbSet<City> Cities { get; init; }
 
+        public DbSet<Manager> Managers { get; init; }
+
         public DbSet<News> News { get; init; }
 
         public DbSet<TeamsNews> TeamsNews { get; init; }
@@ -51,6 +53,11 @@ namespace FNews.Data
             builder.Entity<Player>()
                 .HasOne(x => x.Team)
                 .WithMany(x => x.Players)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Manager>()
+                .HasOne(x => x.Team)
+                .WithOne(x => x.Manager)
                 .OnDelete(DeleteBehavior.Restrict);
 
 

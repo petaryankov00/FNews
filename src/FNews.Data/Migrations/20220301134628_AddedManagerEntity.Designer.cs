@@ -4,6 +4,7 @@ using FNews.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FNews.Data.Migrations
 {
     [DbContext(typeof(FNewsDbContext))]
-    partial class FNewsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220301134628_AddedManagerEntity")]
+    partial class AddedManagerEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,7 +115,7 @@ namespace FNews.Data.Migrations
                         .IsUnique()
                         .HasFilter("[TeamId] IS NOT NULL");
 
-                    b.ToTable("Managers");
+                    b.ToTable("Manager");
                 });
 
             modelBuilder.Entity("FNews.Data.Models.News", b =>

@@ -29,6 +29,10 @@ namespace FNews.Data.Models
 
         public virtual League League { get; set; }
 
+        public int ManagaerId { get; set; }
+
+        public virtual Manager Manager { get; set; }
+
         public virtual ICollection<Player> Players { get; init; } = new HashSet<Player>();
 
         public virtual ICollection<IdentityUser> Users { get; init; } = new HashSet<IdentityUser>();
