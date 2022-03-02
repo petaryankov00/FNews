@@ -19,7 +19,7 @@ namespace FNews.Data.Models
         public DateTime PublishedOn { get; set; }
 
         [Required]
-        public string Source { get; set; }
+        public string Author { get; set; }
 
         public virtual ICollection<TeamsNews> TeamsNews { get; init; } = new HashSet<TeamsNews>();
 
