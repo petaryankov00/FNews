@@ -12,16 +12,14 @@ namespace FNews.Data.Models
         [StringLength(30)]
         public string Name { get; set; }
 
-        [Required]
         public string LogoUrl { get; set; }
 
-        [Required]
         [StringLength(30)]
         public string Stadium { get; set; }
 
-        public DateTime Year { get; init; }
+        public DateTime? Year { get; init; }
 
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
 
         public virtual City City  { get; set; }
 
@@ -29,7 +27,7 @@ namespace FNews.Data.Models
 
         public virtual League League { get; set; }
 
-        public int ManagaerId { get; set; }
+        public int? ManagaerId { get; set; }
 
         public virtual Manager Manager { get; set; }
 

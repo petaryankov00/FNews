@@ -4,7 +4,7 @@ namespace FNews.Data.Seeding
 {
     public class CitySeeder : ISeeder
     {
-        public async Task SeedAsync(FNewsDbContext dbContext, IServiceProvider serviceProvider)
+        public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Cities.Any())
             {
@@ -25,7 +25,7 @@ namespace FNews.Data.Seeding
             
         }
 
-        private async Task AddInBulgaria(int countryId, FNewsDbContext dbContext)
+        private async Task AddInBulgaria(int countryId, ApplicationDbContext dbContext)
         {
             await dbContext.Cities.AddAsync(new City { Name = "Sofia", CountryId = countryId });
             await dbContext.Cities.AddAsync(new City { Name = "Plovdiv", CountryId = countryId });
@@ -38,7 +38,7 @@ namespace FNews.Data.Seeding
 
         }
 
-        private async Task AddInItaly(int countryId, FNewsDbContext dbContext)
+        private async Task AddInItaly(int countryId, ApplicationDbContext dbContext)
         {
             await dbContext.Cities.AddAsync(new City { Name = "Bergamo", CountryId = countryId });
             await dbContext.Cities.AddAsync(new City { Name = "Bologna", CountryId = countryId });
@@ -59,7 +59,7 @@ namespace FNews.Data.Seeding
             await dbContext.Cities.AddAsync(new City { Name = "Venice", CountryId = countryId });
         }
 
-        private async Task AddInGermany(int countryId, FNewsDbContext dbContext)
+        private async Task AddInGermany(int countryId, ApplicationDbContext dbContext)
         {
             await dbContext.Cities.AddAsync(new City { Name = "Dortmund", CountryId = countryId });
             await dbContext.Cities.AddAsync(new City { Name = "Bielefeld", CountryId = countryId });
@@ -80,7 +80,7 @@ namespace FNews.Data.Seeding
             await dbContext.Cities.AddAsync(new City { Name = "Wolfsburg", CountryId = countryId });
         }
 
-        private async Task AddInFrance(int countryId, FNewsDbContext dbContext)
+        private async Task AddInFrance(int countryId, ApplicationDbContext dbContext)
         {
 
             await dbContext.Cities.AddAsync(new City { Name = "Paris", CountryId = countryId });
@@ -105,7 +105,7 @@ namespace FNews.Data.Seeding
             await dbContext.Cities.AddAsync(new City { Name = "Nice", CountryId = countryId });
         }
 
-        private async Task AddInSpain(int countryId,FNewsDbContext dbContext)
+        private async Task AddInSpain(int countryId,ApplicationDbContext dbContext)
         {
             await dbContext.Cities.AddAsync(new City { Name = "Barcelona", CountryId = countryId });
             await dbContext.Cities.AddAsync(new City { Name = "Madrid", CountryId = countryId });
@@ -124,7 +124,7 @@ namespace FNews.Data.Seeding
             await dbContext.Cities.AddAsync(new City { Name = "Villarreal", CountryId = countryId });
         }
 
-        private async Task AddInEngland(int countryId,FNewsDbContext dbContext)
+        private async Task AddInEngland(int countryId,ApplicationDbContext dbContext)
         {
             await dbContext.Cities.AddAsync(new City { Name = "London", CountryId = countryId });
             await dbContext.Cities.AddAsync(new City { Name = "Liverpool", CountryId = countryId });

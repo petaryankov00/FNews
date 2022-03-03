@@ -4,8 +4,13 @@ namespace FNews.Data.Seeding
 {
     public class LeagueSeeder : ISeeder
     {
-        public async Task SeedAsync(FNewsDbContext dbContext, IServiceProvider serviceProvider)
+        public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
+            if (dbContext.Leagues.Any())
+            {
+                return;
+            }
+
            await dbContext.Leagues.AddAsync(new League { Name = "First Professional League", CountryId = 1 });
            await dbContext.Leagues.AddAsync(new League { Name = "Premier League", CountryId = 2 });
            await dbContext.Leagues.AddAsync(new League { Name = "La Liga", CountryId = 3 });

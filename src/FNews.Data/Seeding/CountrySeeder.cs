@@ -4,7 +4,7 @@ namespace FNews.Data.Seeding
 {
     public class CountrySeeder : ISeeder
     {
-        public async Task SeedAsync(FNewsDbContext dbContext, IServiceProvider serviceProvider)
+        public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Countries.Any())
             {
