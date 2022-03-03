@@ -11,8 +11,10 @@ namespace FNews.Data.Seeding
             {
                 return;
             }
+
             await AddInBulgaria(dbContext, 1);
             await AddInEngland(dbContext, 2);
+            await AddInSpain(dbContext, 3);
         }
 
         private async Task AddInBulgaria(ApplicationDbContext dbContext, int leagueId)
@@ -48,13 +50,40 @@ namespace FNews.Data.Seeding
             {
                 var currName = names[i];
                 var currStadium = stadiums[i];
-                dbContext.Teams.Add(new Team 
+                await dbContext.Teams.AddAsync(new Team 
                 { 
                     Name = currName.InnerHtml, 
                     Stadium = currStadium.InnerHtml, 
                     LeagueId = leagueId 
                 });
             }
+        }
+
+        private async Task AddInSpain(ApplicationDbContext dbContext, int leagueId)
+        {
+            var client = new HttpClient();
+            var responseBody = await client.GetStringAsync("https://www.laliga.com/en-GB/laliga-santander/clubs");
+
+            var parser = new HtmlParser();
+            var document = await parser.ParseDocumentAsync(responseBody);
+
+            var names = document.QuerySelectorAll("h2.styled__TextHeaderStyled-sc-1edycnf-0.bYHKtg")
+                .Select(x=> x.InnerHtml)
+                .ToList();
+
+            var secondNames = document.QuerySelectorAll("h2.styled__TextHeaderStyled-sc-1edycnf-0.loRCMK")
+                .Select(x => x.InnerHtml)
+                .ToList();
+
+            for (int i = 0; i < 13; i++)
+            {
+                await dbContext.Teams.AddAsync(new Team { Name = names[i], LeagueId = leagueId});
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                await dbContext.Teams.AddAsync(new Team { Name = secondNames[i], LeagueId = leagueId });
+            }
+
         }
     }
 }
