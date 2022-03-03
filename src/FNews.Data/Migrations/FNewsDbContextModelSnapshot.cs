@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FNews.Data.Migrations
 {
-    [DbContext(typeof(FNewsDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class FNewsDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -76,8 +76,8 @@ namespace FNews.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -150,7 +150,7 @@ namespace FNews.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CountryId")
@@ -188,7 +188,7 @@ namespace FNews.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("int");
 
                     b.Property<int>("LeagueId")
@@ -198,7 +198,7 @@ namespace FNews.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ManagaerId")
+                    b.Property<int?>("ManagaerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -207,11 +207,10 @@ namespace FNews.Data.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Stadium")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<DateTime>("Year")
+                    b.Property<DateTime?>("Year")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -495,9 +494,7 @@ namespace FNews.Data.Migrations
                 {
                     b.HasOne("FNews.Data.Models.City", "City")
                         .WithMany("Teams")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityId");
 
                     b.HasOne("FNews.Data.Models.League", "League")
                         .WithMany("Teams")

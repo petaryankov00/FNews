@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FNews.Data.Migrations
 {
-    [DbContext(typeof(FNewsDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20220301134628_AddedManagerEntity")]
     partial class AddedManagerEntity
     {

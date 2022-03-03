@@ -8,7 +8,7 @@ namespace FNews.Data.Models
         public int Id { get; init; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(30)]
         public string Name { get; set; }
 
         public int CountryId { get; set; }

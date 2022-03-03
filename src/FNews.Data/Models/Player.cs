@@ -19,7 +19,7 @@ namespace FNews.Data.Models
         [StringLength(20)]
         public string Position { get; set; }
 
-        public DateTime BirthDate { get; init; }
+        public DateTime? BirthDate { get; init; }
 
         public string TeamId { get; set; }
 

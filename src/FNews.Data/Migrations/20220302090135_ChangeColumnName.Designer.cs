@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FNews.Data.Migrations
 {
-    [DbContext(typeof(FNewsDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20220302090135_ChangeColumnName")]
     partial class ChangeColumnName
     {

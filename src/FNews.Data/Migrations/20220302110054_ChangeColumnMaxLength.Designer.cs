@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FNews.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220301113446_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220302110054_ChangeColumnMaxLength")]
+    partial class ChangeColumnMaxLength
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,8 +78,8 @@ namespace FNews.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -88,10 +88,44 @@ namespace FNews.Data.Migrations
                     b.ToTable("Leagues");
                 });
 
+            modelBuilder.Entity("FNews.Data.Models.Manager", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("TeamId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId")
+                        .IsUnique()
+                        .HasFilter("[TeamId] IS NOT NULL");
+
+                    b.ToTable("Managers");
+                });
+
             modelBuilder.Entity("FNews.Data.Models.News", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -107,10 +141,6 @@ namespace FNews.Data.Migrations
 
                     b.Property<DateTime>("PublishedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Source")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -169,6 +199,9 @@ namespace FNews.Data.Migrations
                     b.Property<string>("LogoUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ManagaerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -432,6 +465,16 @@ namespace FNews.Data.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("FNews.Data.Models.Manager", b =>
+                {
+                    b.HasOne("FNews.Data.Models.Team", "Team")
+                        .WithOne("Manager")
+                        .HasForeignKey("FNews.Data.Models.Manager", "TeamId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("FNews.Data.Models.Player", b =>
                 {
                     b.HasOne("FNews.Data.Models.Country", "Country")
@@ -572,6 +615,8 @@ namespace FNews.Data.Migrations
 
             modelBuilder.Entity("FNews.Data.Models.Team", b =>
                 {
+                    b.Navigation("Manager");
+
                     b.Navigation("Players");
 
                     b.Navigation("TeamsNews");

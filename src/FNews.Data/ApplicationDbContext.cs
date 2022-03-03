@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FNews.Data
 {
-    public class FNewsDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public FNewsDbContext(DbContextOptions<FNewsDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }

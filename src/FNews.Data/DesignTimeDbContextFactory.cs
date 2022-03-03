@@ -4,20 +4,20 @@ using Microsoft.Extensions.Configuration;
 
 namespace FNews.Data
 {
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<FNewsDbContext>
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-        public FNewsDbContext CreateDbContext(string[] args)
+        public ApplicationDbContext CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            var builder = new DbContextOptionsBuilder<FNewsDbContext>();
+            var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             builder.UseSqlServer(connectionString);
 
-            return new FNewsDbContext(builder.Options);
+            return new ApplicationDbContext(builder.Options);
         }
     }
 }

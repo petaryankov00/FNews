@@ -6,7 +6,7 @@ namespace FNews.Data.Common
     {
         private readonly DbContext dbContext;
 
-        public Repository(FNewsDbContext dbcontext)
+        public Repository(ApplicationDbContext dbcontext)
         {
             dbContext = dbcontext;
         }
