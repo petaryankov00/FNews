@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FNews.Data", "FNews.Data\FN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FNews.Global", "FNews.Global\FNews.Global.csproj", "{41578A28-3FE7-454C-A0B9-31DB8E278B5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FNews.Services", "FNews.Services\FNews.Services.csproj", "{8EF85750-7A81-41E3-AD85-6376BC9E07D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FNews.ViewModels", "FNews.ViewModels\FNews.ViewModels.csproj", "{CE2B685A-BFB1-4378-B23B-3D94F2F83AC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{41578A28-3FE7-454C-A0B9-31DB8E278B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41578A28-3FE7-454C-A0B9-31DB8E278B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41578A28-3FE7-454C-A0B9-31DB8E278B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EF85750-7A81-41E3-AD85-6376BC9E07D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EF85750-7A81-41E3-AD85-6376BC9E07D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EF85750-7A81-41E3-AD85-6376BC9E07D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EF85750-7A81-41E3-AD85-6376BC9E07D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE2B685A-BFB1-4378-B23B-3D94F2F83AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE2B685A-BFB1-4378-B23B-3D94F2F83AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE2B685A-BFB1-4378-B23B-3D94F2F83AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE2B685A-BFB1-4378-B23B-3D94F2F83AC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
