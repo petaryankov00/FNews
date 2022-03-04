@@ -14,7 +14,7 @@ namespace FNews.Data.Models
 
         public string LogoUrl { get; set; }
 
-        [StringLength(30)]
+        [StringLength(50)]
         public string Stadium { get; set; }
 
         public DateTime? Year { get; init; }

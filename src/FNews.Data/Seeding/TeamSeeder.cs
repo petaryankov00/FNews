@@ -1,10 +1,17 @@
-﻿using AngleSharp.Html.Parser;
-using FNews.Data.Models;
+﻿using FNews.Data.Models;
+using FNews.Data.Seeding.SeedModels;
+using Newtonsoft.Json;
+using System.Globalization;
 
 namespace FNews.Data.Seeding
 {
     public class TeamSeeder : ISeeder
     {
+        private const string HeaderKey = "x-rapidapi-key";
+        private const string HeaderHost = "x-rapidapi-host";
+        private const string AuthToken = "81a0196ea706beae9db0ef083fc86090";
+        private const string ApiVersion = "v3.football.api-sports.io";
+
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Teams.Any())
@@ -13,8 +20,48 @@ namespace FNews.Data.Seeding
             }
 
             await AddInBulgaria(dbContext, 1);
-            await AddInEngland(dbContext, 2);
-            await AddInSpain(dbContext, 3);
+            await AddTeamsInLeagues(dbContext, 2, 39);
+            await AddTeamsInLeagues(dbContext, 3, 140);
+            await AddTeamsInLeagues(dbContext, 4, 61);
+            await AddTeamsInLeagues(dbContext, 5, 78);
+            await AddTeamsInLeagues(dbContext, 6, 135);
+        }
+
+        private async Task AddTeamsInLeagues(ApplicationDbContext dbContext, int dbLeagueId, int apiLeagueId)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add(HeaderKey, AuthToken);
+            client.DefaultRequestHeaders.Add(HeaderHost, ApiVersion);
+            var response = await client.GetAsync($"https://v3.football.api-sports.io/teams?league={apiLeagueId}&season=2021");
+
+            var json = await response.Content.ReadAsStringAsync();
+            var teams = JsonConvert.DeserializeObject<TeamSeedModel>(json);
+
+            List<Team> teamsList = new List<Team>();
+
+            foreach (var c in teams.Response)
+            {
+                var city = dbContext.Cities.FirstOrDefault(x => x.Name == c.Venue.City);
+
+                if (city == null)
+                {
+                    city = new City { CountryId = 2, Name = c.Venue.City };
+                }
+
+                var team = new Team
+                {
+                    LeagueId = dbLeagueId,
+                    Name = c.Team.Name,
+                    City = city,
+                    Stadium = c.Venue.Name,
+                    LogoUrl = c.Team.Logo,
+                    Year = DateTime.ParseExact(c.Team.Founded.ToString(), "yyyy", CultureInfo.InvariantCulture)
+                };
+
+                teamsList.Add(team);
+            }
+
+            await dbContext.AddRangeAsync(teamsList);
         }
 
         private async Task AddInBulgaria(ApplicationDbContext dbContext, int leagueId)
@@ -35,55 +82,8 @@ namespace FNews.Data.Seeding
             await dbContext.Teams.AddAsync(new Team { Name = "Ludogorets Razgrad",LeagueId = leagueId });
         }
 
-        private async Task AddInEngland(ApplicationDbContext dbContext, int leagueId)
-        {
-            var client = new HttpClient();
-            var responseBody = await client.GetStringAsync("https://www.premierleague.com/clubs");
 
-            var parser = new HtmlParser();
-            var document = await parser.ParseDocumentAsync(responseBody);
 
-            var names = document.QuerySelectorAll("h4.clubName").ToList();
-            var stadiums = document.QuerySelectorAll("div.stadiumName").ToList();
-
-            for (int i = 0; i < 20; i++)
-            {
-                var currName = names[i];
-                var currStadium = stadiums[i];
-                await dbContext.Teams.AddAsync(new Team 
-                { 
-                    Name = currName.InnerHtml, 
-                    Stadium = currStadium.InnerHtml, 
-                    LeagueId = leagueId 
-                });
-            }
-        }
-
-        private async Task AddInSpain(ApplicationDbContext dbContext, int leagueId)
-        {
-            var client = new HttpClient();
-            var responseBody = await client.GetStringAsync("https://www.laliga.com/en-GB/laliga-santander/clubs");
-
-            var parser = new HtmlParser();
-            var document = await parser.ParseDocumentAsync(responseBody);
-
-            var names = document.QuerySelectorAll("h2.styled__TextHeaderStyled-sc-1edycnf-0.bYHKtg")
-                .Select(x=> x.InnerHtml)
-                .ToList();
-
-            var secondNames = document.QuerySelectorAll("h2.styled__TextHeaderStyled-sc-1edycnf-0.loRCMK")
-                .Select(x => x.InnerHtml)
-                .ToList();
-
-            for (int i = 0; i < 13; i++)
-            {
-                await dbContext.Teams.AddAsync(new Team { Name = names[i], LeagueId = leagueId});
-            }
-            for (int i = 0; i < 7; i++)
-            {
-                await dbContext.Teams.AddAsync(new Team { Name = secondNames[i], LeagueId = leagueId });
-            }
-
-        }
+        
     }
 }

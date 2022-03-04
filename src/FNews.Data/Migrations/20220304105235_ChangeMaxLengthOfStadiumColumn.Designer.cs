@@ -4,6 +4,7 @@ using FNews.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FNews.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class FNewsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220304105235_ChangeMaxLengthOfStadiumColumn")]
+    partial class ChangeMaxLengthOfStadiumColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,6 +197,7 @@ namespace FNews.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LogoUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ManagaerId")
