@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FNews.Global\FNews.Global.csproj" />
+    <ProjectReference Include="..\FNews.Services\FNews.Services.csproj" />
+    <ProjectReference Include="..\FNews.Web\FNews.Web.csproj" />
+  </ItemGroup>
+
 </Project>
