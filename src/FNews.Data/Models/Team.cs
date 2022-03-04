@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FNews.Global;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace FNews.Data.Models
@@ -9,12 +10,12 @@ namespace FNews.Data.Models
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         [Required]
-        [StringLength(30)]
+        [StringLength(GlobalConstants.TeamNameMaxLength)]
         public string Name { get; set; }
 
         public string LogoUrl { get; set; }
 
-        [StringLength(50)]
+        [StringLength(GlobalConstants.TeamStadiumMaxLength)]
         public string Stadium { get; set; }
 
         public DateTime? Year { get; init; }

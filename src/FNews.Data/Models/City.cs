@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FNews.Global;
+using System.ComponentModel.DataAnnotations;
 
 namespace FNews.Data.Models
 {
@@ -8,7 +9,7 @@ namespace FNews.Data.Models
         public int Id { get; init; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(GlobalConstants.CityNameMaxLength)]
         public string Name { get; init; }
 
         public int CountryId { get; set; }

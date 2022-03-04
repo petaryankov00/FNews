@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FNews.Global;
+using System.ComponentModel.DataAnnotations;
 
 namespace FNews.Data.Models
 {
@@ -8,15 +9,15 @@ namespace FNews.Data.Models
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         [Required]
-        [StringLength(40)]
+        [StringLength(GlobalConstants.PlayerFirstNameMaxLength)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(40)]
+        [StringLength(GlobalConstants.PlayerLastNameMaxLength)]
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(GlobalConstants.PlayerLPositionMaxLength)]
         public string Position { get; set; }
 
         public DateTime? BirthDate { get; init; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FNews.Global;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +11,7 @@ namespace FNews.Data.Models
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         [Required]
-        [StringLength(100)]
+        [StringLength(GlobalConstants.NewsHeaderMaxLength)]
         public string Header { get; set; }
 
         [Required]
