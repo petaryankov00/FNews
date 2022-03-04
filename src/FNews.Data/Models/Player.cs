@@ -8,11 +8,11 @@ namespace FNews.Data.Models
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         [Required]
-        [StringLength(20)]
+        [StringLength(40)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(40)]
         public string LastName { get; set; }
 
         [Required]
@@ -20,6 +20,8 @@ namespace FNews.Data.Models
         public string Position { get; set; }
 
         public DateTime? BirthDate { get; init; }
+
+        public string PhotoUrl { get; set; }
 
         public string TeamId { get; set; }
 
