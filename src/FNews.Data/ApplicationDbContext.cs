@@ -60,6 +60,11 @@ namespace FNews.Data
                 .WithOne(x => x.Manager)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<News>()
+                .HasOne(x => x.Author)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             base.OnModelCreating(builder);
         }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FNews.Data.Models
 {
@@ -18,8 +20,10 @@ namespace FNews.Data.Models
 
         public DateTime PublishedOn { get; set; }
 
-        [Required]
-        public string Author { get; set; }
+        public string AuthorId { get; set; }
+
+        [ForeignKey(nameof(AuthorId))]
+        public IdentityUser Author { get; set; }
 
         public virtual ICollection<TeamsNews> TeamsNews { get; init; } = new HashSet<TeamsNews>();
 
