@@ -25,6 +25,7 @@ namespace FNews.Data.Seeding
                               new CitySeeder(),
                               new LeagueSeeder(),
                               new TeamSeeder(),
+                              new PlayerSeeder(),
                           };
 
             foreach (var seeder in seeders)

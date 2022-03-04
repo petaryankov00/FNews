@@ -1,5 +1,6 @@
 ﻿using FNews.Data.Models;
 using FNews.Data.Seeding.SeedModels;
+using FNews.Global;
 using Newtonsoft.Json;
 using System.Globalization;
 
@@ -7,11 +8,7 @@ namespace FNews.Data.Seeding
 {
     public class TeamSeeder : ISeeder
     {
-        private const string HeaderKey = "x-rapidapi-key";
-        private const string HeaderHost = "x-rapidapi-host";
-        private const string AuthToken = "81a0196ea706beae9db0ef083fc86090";
-        private const string ApiVersion = "v3.football.api-sports.io";
-
+        
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Teams.Any())
@@ -30,8 +27,8 @@ namespace FNews.Data.Seeding
         private async Task AddTeamsInLeagues(ApplicationDbContext dbContext, int dbLeagueId, int apiLeagueId)
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add(HeaderKey, AuthToken);
-            client.DefaultRequestHeaders.Add(HeaderHost, ApiVersion);
+            client.DefaultRequestHeaders.Add(GlobalConstants.ApiHeaderKey, GlobalConstants.ApiAuthToken);
+            client.DefaultRequestHeaders.Add(GlobalConstants.ApiHeaderHost, GlobalConstants.ApiVersion);
             var response = await client.GetAsync($"https://v3.football.api-sports.io/teams?league={apiLeagueId}&season=2021");
 
             var json = await response.Content.ReadAsStringAsync();
