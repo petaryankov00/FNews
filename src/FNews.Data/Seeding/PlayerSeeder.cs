@@ -11,13 +11,13 @@ namespace FNews.Data.Seeding
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            ////if (dbContext.Players.Any())
-            ////{
-            ////    return;
-            ////}
+            if (dbContext.Players.Any())
+            {
+                return;
+            }
 
             //await AddPlayers(dbContext, 39);
-            ////await AddPlayers(dbContext, 140);
+            await AddPlayers(dbContext, 140);
 
         }
 
@@ -29,7 +29,7 @@ namespace FNews.Data.Seeding
 
             List<Player> players = new List<Player>();
             
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 39; i++)
             {
                 var response = await client.GetAsync($"https://v3.football.api-sports.io/players?league={apiLeagueId}&season=2021&page={i}");
 
