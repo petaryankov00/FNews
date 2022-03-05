@@ -42,7 +42,7 @@ namespace FNews.Data.Seeding
 
                 if (city == null)
                 {
-                    city = new City { CountryId = 2, Name = c.Venue.City };
+                    city = new City { CountryId = dbLeagueId, Name = c.Venue.City };
                 }
 
                 var team = new Team
