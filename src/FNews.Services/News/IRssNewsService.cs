@@ -1,4 +1,4 @@
-﻿using FNews.ViewModels.News;
+﻿using FNews.ViewModels.RssNews;
 
 namespace FNews.Services.News
 {

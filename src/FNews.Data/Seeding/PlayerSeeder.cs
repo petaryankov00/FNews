@@ -17,7 +17,7 @@ namespace FNews.Data.Seeding
             }
 
             //await AddPlayers(dbContext, 39);
-            await AddPlayers(dbContext, 140);
+            //await AddPlayers(dbContext, 140);
 
         }
 
@@ -48,7 +48,16 @@ namespace FNews.Data.Seeding
                     }
                      
                     DateTime.TryParse(p.Player.Birth.Date, out var date);
-                    var player = new Player
+
+                    var player = dbContext.Players
+                        .FirstOrDefault(x => x.FirstName == p.Player.Firstname && x.LastName == p.Player.Lastname);
+
+                    if (player != null)
+                    {
+                        continue;
+                    }
+
+                    player = new Player
                     {
                         FirstName = p.Player.Firstname,
                         LastName = p.Player.Lastname,
