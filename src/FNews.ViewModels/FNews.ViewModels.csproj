@@ -3,13 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FNews.Global\FNews.Global.csproj" />
-    <ProjectReference Include="..\FNews.Services\FNews.Services.csproj" />
-    <ProjectReference Include="..\FNews.Web\FNews.Web.csproj" />
   </ItemGroup>
 
 </Project>

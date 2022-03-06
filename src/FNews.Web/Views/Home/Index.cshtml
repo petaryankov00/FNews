@@ -1,5 +1,30 @@
-﻿@{
+﻿@using FNews.ViewModels.RssNews
+@model IEnumerable<MainNewsViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<h1 class="alert-warning text-center">Something cool is coming</h1>
+<h1 class="alert-heading text-center">Main News</h1>
+
+<div class="row mb-1 mt-1">
+    @foreach (var news in Model)
+{
+    <div class="col-6 ml-2 col-lg-3">
+        <div class="card" style="width: 18rem;">
+            <img src=@news.ImageUrl class="card-img-top">
+            <div class="card-header">
+                @news.Title
+            </div>
+            <div class="card-body">
+                <p class="card-text">@news.Descrption</p>
+                <span>Learn more at:</span>
+                <a href=@news.Link class="link-info">Gong.bg</a>
+            </div>
+            <div class="card-footer text-muted">
+                Published on: @news.Date
+            </div>
+        </div>
+    </div>
+}
+</div>

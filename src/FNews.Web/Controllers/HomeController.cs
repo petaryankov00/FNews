@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FNews.Services.News;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FNews.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IRssNewsService newsService;
+        public HomeController(IRssNewsService newsService)
         {
-            
+            this.newsService = newsService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var news = newsService.GetMainNews();
+            return View(news);
         }
     }
 }

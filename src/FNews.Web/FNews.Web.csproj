@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FNews.Data\FNews.Data.csproj" />
+    <ProjectReference Include="..\FNews.Services\FNews.Services.csproj" />
+    <ProjectReference Include="..\FNews.ViewModels\FNews.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

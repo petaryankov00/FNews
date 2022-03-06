@@ -1,15 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FNews.Data\FNews.Data.csproj" />
     <ProjectReference Include="..\FNews.Global\FNews.Global.csproj" />
-    <ProjectReference Include="..\FNews.Web\FNews.Web.csproj" />
+    <ProjectReference Include="..\FNews.ViewModels\FNews.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
