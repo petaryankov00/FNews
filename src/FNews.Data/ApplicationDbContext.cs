@@ -39,7 +39,7 @@ namespace FNews.Data
 
             builder.Entity<TeamsArticles>()
                 .HasOne(x => x.Article)
-                .WithMany(x => x.TeamsNews)
+                .WithMany(x => x.TeamsArticles)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Team>()
