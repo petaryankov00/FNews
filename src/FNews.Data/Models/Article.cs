@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FNews.Data.Models
 {
-    public class News
+    public class Article
     {
         [Key]
         public string Id { get; init; } = Guid.NewGuid().ToString();
@@ -26,7 +26,7 @@ namespace FNews.Data.Models
         [ForeignKey(nameof(AuthorId))]
         public IdentityUser Author { get; set; }
 
-        public virtual ICollection<TeamsNews> TeamsNews { get; init; } = new HashSet<TeamsNews>();
+        public virtual ICollection<TeamsArticles> TeamsNews { get; init; } = new HashSet<TeamsArticles>();
 
 
     }

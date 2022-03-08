@@ -1,13 +1,13 @@
 ﻿namespace FNews.Data.Models
 {
-    public class TeamsNews
+    public class TeamsArticles
     {
         public string TeamId { get; init; }
 
         public virtual Team Team { get; init; }
 
-        public string NewsId { get; init; }
+        public string ArticleId { get; init; }
 
-        public virtual News News { get; init; }
+        public virtual Article Article { get; init; }
     }
 }

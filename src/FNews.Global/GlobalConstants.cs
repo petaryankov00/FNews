@@ -23,6 +23,6 @@
         public const int PlayerLPositionMaxLength = 40;
 
         public const int TeamNameMaxLength = 30;
-        public const int TeamStadiumMaxLength = 30;
+        public const int TeamStadiumMaxLength = 50;
     }
 }

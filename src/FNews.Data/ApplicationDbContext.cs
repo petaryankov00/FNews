@@ -23,22 +23,22 @@ namespace FNews.Data
 
         public DbSet<Manager> Managers { get; init; }
 
-        public DbSet<News> News { get; init; }
+        public DbSet<Article> Articles { get; init; }
 
-        public DbSet<TeamsNews> TeamsNews { get; init; }
+        public DbSet<TeamsArticles> TeamsNews { get; init; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<TeamsNews>()
-                .HasKey(k => new { k.TeamId, k.NewsId });
+            builder.Entity<TeamsArticles>()
+                .HasKey(k => new { k.TeamId, k.ArticleId });
 
-            builder.Entity<TeamsNews>()
+            builder.Entity<TeamsArticles>()
                 .HasOne(x => x.Team)
-                .WithMany(x => x.TeamsNews)
+                .WithMany(x => x.TeamsArticles)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<TeamsNews>()
-                .HasOne(x => x.News)
+            builder.Entity<TeamsArticles>()
+                .HasOne(x => x.Article)
                 .WithMany(x => x.TeamsNews)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -60,7 +60,7 @@ namespace FNews.Data
                 .WithOne(x => x.Manager)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<News>()
+            builder.Entity<Article>()
                 .HasOne(x => x.Author)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);

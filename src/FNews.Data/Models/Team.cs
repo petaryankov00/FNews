@@ -36,6 +36,6 @@ namespace FNews.Data.Models
 
         public virtual ICollection<IdentityUser> Users { get; init; } = new HashSet<IdentityUser>();
 
-        public virtual ICollection<TeamsNews> TeamsNews { get; init; } = new HashSet<TeamsNews>();
+        public virtual ICollection<TeamsArticles> TeamsArticles { get; init; } = new HashSet<TeamsArticles>();
     }
 }
