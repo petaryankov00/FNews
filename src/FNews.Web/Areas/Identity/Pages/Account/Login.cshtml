@@ -14,16 +14,16 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="mt-10">
                     <label asp-for="Input.Email" class="form-label"></label>
-                    <input asp-for="Input.Email" type="text" name="first_name" placeholder="Email"
+                    <input asp-for="Input.Email" type="text" name="Input.Email" placeholder="Email"
                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required
                            class="single-input">
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="mt-10">
                     <label asp-for="Input.Password" class="form-label"></label>
-                    <input asp-for="Input.Password" type="text" name="first_name" placeholder="Password"
+                    <input asp-for="Input.Password" name="Input.Password" placeholder="Password"
                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required
-                           class="single-input">
+                           class="single-input form-control">
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div>
