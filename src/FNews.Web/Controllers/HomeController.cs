@@ -6,6 +6,7 @@ namespace FNews.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IRssNewsService newsService;
+
         public HomeController(IRssNewsService newsService)
         {
             this.newsService = newsService;
@@ -16,5 +17,8 @@ namespace FNews.Web.Controllers
             var news = newsService.GetMainNews();
             return View(news);
         }
+
+        public IActionResult Error()
+         => this.View();
     }
 }

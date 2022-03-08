@@ -1,6 +1,7 @@
 ﻿using FNews.Data.Common;
 using FNews.Data.Models;
 using FNews.ViewModels.Articles;
+using Microsoft.AspNetCore.Identity;
 
 namespace FNews.Services.Articles
 {
@@ -15,25 +16,25 @@ namespace FNews.Services.Articles
 
         public void CreateArticle(CreateArticleInputModel model)
         {
-            var teams = repo.All<Team>()
-                .Where(x => x.Name.Contains(model.Team))
-                .ToList();
+            var team = repo.All<Team>()
+                .Where(x => x.Name == model.Team)
+                .FirstOrDefault();
+
+            var author = repo.All<IdentityUser>()
+                .FirstOrDefault(x => x.UserName == model.Author);
 
             var article = new Article
             {
-                AuthorId = model.AuthorId,
+                Author = author,
                 Header = model.Header,
                 Description = model.Description,
                 ImageUrl = model.ImageUrl,
                 PublishedOn = DateTime.UtcNow,
             };
 
-            if(teams != null)
+            if (team != null)
             {
-                foreach (var team in teams)
-                {
-                    article.TeamsArticles.Add(new TeamsArticles { Team = team, Article = article });
-                }
+                article.TeamsArticles.Add(new TeamsArticles { Team = team, Article = article });
             }
 
             repo.Add(article);
@@ -53,6 +54,18 @@ namespace FNews.Services.Articles
                 .ToList();
 
             return articles;
+        }
+
+        public CreateArticleInputModel GetTeamNames()
+        {
+            var teams = repo.All<Team>()
+                .Select(x => x.Name)
+                .OrderBy(x=>x)
+                .ToList();
+
+            var result = new CreateArticleInputModel { Teams = teams };
+
+            return result;
         }
     }
 }

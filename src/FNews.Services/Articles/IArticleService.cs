@@ -6,6 +6,8 @@ namespace FNews.Services.Articles
     {
         IEnumerable<AllArticlesViewModel> GetAll();
 
+        CreateArticleInputModel GetTeamNames();
+
         void CreateArticle(CreateArticleInputModel model);
     }
 }

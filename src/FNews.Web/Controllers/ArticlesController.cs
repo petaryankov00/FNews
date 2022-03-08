@@ -22,7 +22,10 @@ namespace FNews.Web.Controllers
 
         [Authorize]
         public IActionResult Create()
-            => this.View();
+        {
+            var teams = articleService.GetTeamNames();
+            return this.View(teams);
+        }
 
         [Authorize]
         [HttpPost]
@@ -40,7 +43,7 @@ namespace FNews.Web.Controllers
             catch (Exception)
             {
 
-                return RedirectToAction("Error");
+                return RedirectToAction("Error","Home");
             }
 
             return RedirectToAction("All", "Articles");

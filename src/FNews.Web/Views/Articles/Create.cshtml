@@ -27,8 +27,15 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label asp-for="Team"></label>
-                        <input asp-for="Team" class="form-control" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Teams in this article'" placeholder="Teams in this article">
-                        <span asp-validation-for="Team" class="small text-danger"></span>
+                        <div class="form-select">
+                            <select asp-for="Team">
+                                @foreach (var team in Model.Teams)
+                                {
+                                    <option value="@team">@team</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Team" class="small text-danger"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -38,8 +45,9 @@
                         <span asp-validation-for="ImageUrl" class="small text-danger"></span>
                     </div>
                 </div>
+                <input type="text" hidden id="id" name="Author" value="@this.User.Identity.Name" />
             </div>
-            <button type="submit" class="button boxed-btn">Create</button>
+            <button type="submit" class="button boxed-btn mb-5">Create</button>
         </form>
     </div>
 </div>
