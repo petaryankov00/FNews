@@ -16,7 +16,10 @@
         public const int MangerFirstNameMaxLength = 20;
         public const int MangerLastNameMaxLength = 20;
 
-        public const int NewsHeaderMaxLength = 100;
+        public const int ArticleHeaderMaxLength = 100;
+        public const int ArticleHeaderMinLength = 10;
+        public const int ArticleDescriptionMinLength = 20;
+
 
         public const int PlayerFirstNameMaxLength = 40;
         public const int PlayerLastNameMaxLength = 40;

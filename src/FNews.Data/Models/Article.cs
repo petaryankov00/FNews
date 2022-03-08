@@ -11,7 +11,7 @@ namespace FNews.Data.Models
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         [Required]
-        [StringLength(GlobalConstants.NewsHeaderMaxLength)]
+        [StringLength(GlobalConstants.ArticleHeaderMaxLength)]
         public string Header { get; set; }
 
         [Required]
@@ -26,7 +26,7 @@ namespace FNews.Data.Models
         [ForeignKey(nameof(AuthorId))]
         public IdentityUser Author { get; set; }
 
-        public virtual ICollection<TeamsArticles> TeamsNews { get; init; } = new HashSet<TeamsArticles>();
+        public virtual ICollection<TeamsArticles> TeamsArticles { get; init; } = new HashSet<TeamsArticles>();
 
 
     }
