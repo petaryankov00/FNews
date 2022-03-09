@@ -20,12 +20,9 @@ namespace FNews.Services.Articles
                 .Where(x => x.Name == model.Team)
                 .FirstOrDefault();
 
-            var author = repo.All<IdentityUser>()
-                .FirstOrDefault(x => x.UserName == model.Author);
-
             var article = new Article
             {
-                Author = author,
+                AuthorId = model.AuthorId,
                 Header = model.Header,
                 Description = model.Description,
                 ImageUrl = model.ImageUrl,
