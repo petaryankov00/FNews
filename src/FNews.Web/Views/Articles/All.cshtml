@@ -1,7 +1,7 @@
 ﻿@using System.Security.Claims
 @using FNews.ViewModels.Articles
 
-@model IEnumerable<AllArticlesViewModel>
+@model AllArticlesViewModel
 
 @{
     ViewData["Title"] = "All Articles";
@@ -35,7 +35,7 @@
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <div class="whats-news-caption">
                                     <div class="row">
-                                        @foreach (var article in Model)
+                                        @foreach (var article in Model.Articles)
                                         {
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="single-what-news mb-100">
@@ -59,9 +59,47 @@
             <div class="col-lg-4">
                 <!-- Section Tittle -->
                 <div class="section-tittle mb-40">
-                    <a asp-controller ="Articles" asp-action="Create" class="genric-btn large warning text-dark font-weight-bold">Create Article</a>
+                    <a asp-controller="Articles" asp-action="Create" class="genric-btn large warning text-dark font-weight-bold">Create Article</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalArticles / AllArticlesViewModel.ArticlesPerPage);
+}
+<div class="pagination-area pb-45 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="single-wrap d-flex justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-start">
+                            <li>
+                                <a class="genric-btn info radius" @(Model.CurrentPage == 1 ? "style=\"pointer-events: none\"" : string.Empty)
+                                   asp-controller="Articles"
+                                   asp-action="All"
+                                   asp-route-currentPage="@previousPage"><<</a>
+                            </li>
+                            @{
+                                var shouldButtonBeDisabled = Model.CurrentPage == maxPage || !Model.Articles.Any();
+                            }
+                            <li>
+                                <a class="ml-5 genric-btn info radius" @(shouldButtonBeDisabled ? "style=\"pointer-events: none\"" : string.Empty)
+                                   asp-controller="Articles"
+                                   asp-action="All"
+                                   asp-route-currentPage="@(Model.CurrentPage + 1)">>></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

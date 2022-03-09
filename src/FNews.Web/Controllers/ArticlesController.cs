@@ -14,16 +14,15 @@ namespace FNews.Web.Controllers
             this.articleService = articleService;
         }
 
-        public IActionResult All()
+        public IActionResult All(int currentPage = 1)
         {
-            var articles = articleService.GetAll();
+            var articles = articleService.GetAll(currentPage);
             return this.View(articles);
         }
 
         public IActionResult MyArticles(string id)
         {
-            var articles = articleService.GetAll();
-            return this.View(articles);
+            return this.View();
         }
 
         [Authorize]

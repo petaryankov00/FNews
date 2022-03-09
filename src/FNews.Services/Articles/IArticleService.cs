@@ -4,7 +4,7 @@ namespace FNews.Services.Articles
 {
     public interface IArticleService
     {
-        IEnumerable<AllArticlesViewModel> GetAll();
+        AllArticlesViewModel GetAll(int currentPage);
 
         CreateArticleInputModel GetTeamNames();
 

@@ -2,12 +2,12 @@
 {
     public class AllArticlesViewModel
     {
-        public string Id { get; init; }
+        public const int ArticlesPerPage = 4;
 
-        public string Header { get; init; }
+        public int? CurrentPage { get; set; }
 
-        public string ImageUrl { get; init; }
+        public int TotalArticles { get; set; }
 
-        public string TeamName { get; init; }
+        public List<ArticleDataViewModel> Articles { get; set; } = new List<ArticleDataViewModel>();
     }
 }

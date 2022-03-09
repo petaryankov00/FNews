@@ -38,19 +38,29 @@ namespace FNews.Services.Articles
             repo.SaveChanges();
         }
 
-        public IEnumerable<AllArticlesViewModel> GetAll()
+        public AllArticlesViewModel GetAll(int currentPage)
         {
-            var articles = repo.All<Article>()
-                .Select(x => new AllArticlesViewModel
-                {
-                    Header = x.Header,
-                    Id = x.Id,
-                    ImageUrl = x.ImageUrl,
-                    TeamName = x.TeamsArticles.FirstOrDefault().Team.Name
-                })
-                .ToList();
+            var articleQuery = repo.All<Article>();
+            var totalArticles = articleQuery.Count();
 
-            return articles;
+            var result = new AllArticlesViewModel { CurrentPage = currentPage, TotalArticles = totalArticles };
+
+            var articles = articleQuery
+                 .Select(x => new ArticleDataViewModel
+                 {
+                     Header = x.Header,
+                     Id = x.Id,
+                     ImageUrl = x.ImageUrl,
+                     TeamName = x.TeamsArticles.FirstOrDefault().Team.Name,
+                 })
+                 .Skip((currentPage - 1) * AllArticlesViewModel.ArticlesPerPage)
+                 .Take(AllArticlesViewModel.ArticlesPerPage)
+                 .ToList();
+
+            result.Articles.AddRange(articles);
+
+
+            return result;
         }
 
         public CreateArticleInputModel GetTeamNames()
