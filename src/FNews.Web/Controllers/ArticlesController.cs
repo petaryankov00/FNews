@@ -20,6 +20,12 @@ namespace FNews.Web.Controllers
             return this.View(articles);
         }
 
+        public IActionResult MyArticles(string id)
+        {
+            var articles = articleService.GetAll();
+            return this.View(articles);
+        }
+
         [Authorize]
         public IActionResult Create()
         {
@@ -33,7 +39,8 @@ namespace FNews.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.View(model);
+                var teams = articleService.GetTeamNames();
+                return this.View(teams);
             }
 
             try
