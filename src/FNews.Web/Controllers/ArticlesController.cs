@@ -24,6 +24,13 @@ namespace FNews.Web.Controllers
         public IActionResult UserArticles(string id,[FromQuery]int currentPage = 1)
         {
             var articles = articleService.GetById(id,currentPage);
+            string value = this.HttpContext.Request.Path.Value
+                .Split("/")
+                .Skip(2)
+                .Take(1)
+                .FirstOrDefault();
+            ViewData["Path"] = value;
+
             return View("All",articles);
         }
 
