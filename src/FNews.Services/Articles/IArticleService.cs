@@ -6,6 +6,8 @@ namespace FNews.Services.Articles
     {
         AllArticlesViewModel GetAll(int currentPage);
 
+        AllArticlesViewModel GetById(string id,int currentPage);
+
         CreateArticleInputModel GetTeamNames();
 
         void CreateArticle(CreateArticleInputModel model);

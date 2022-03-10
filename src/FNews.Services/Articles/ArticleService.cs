@@ -41,6 +41,32 @@ namespace FNews.Services.Articles
         public AllArticlesViewModel GetAll(int currentPage)
         {
             var articleQuery = repo.All<Article>();
+    
+            return GetArticles(articleQuery,currentPage);
+        }
+
+        public AllArticlesViewModel GetById(string id, int currentPage)
+        {
+            var articleQuery = repo.All<Article>()
+                .Where(x => x.AuthorId == id);
+
+            return GetArticles(articleQuery, currentPage);
+        }
+
+        public CreateArticleInputModel GetTeamNames()
+        {
+            var teams = repo.All<Team>()
+                .Select(x => x.Name)
+                .OrderBy(x => x)
+                .ToList();
+
+            var result = new CreateArticleInputModel { Teams = teams };
+
+            return result;
+        }
+
+        private static AllArticlesViewModel GetArticles(IQueryable<Article> articleQuery,int currentPage)
+        {
             var totalArticles = articleQuery.Count();
 
             var result = new AllArticlesViewModel { CurrentPage = currentPage, TotalArticles = totalArticles };
@@ -59,18 +85,6 @@ namespace FNews.Services.Articles
 
             result.Articles.AddRange(articles);
 
-
-            return result;
-        }
-
-        public CreateArticleInputModel GetTeamNames()
-        {
-            var teams = repo.All<Team>()
-                .Select(x => x.Name)
-                .OrderBy(x=>x)
-                .ToList();
-
-            var result = new CreateArticleInputModel { Teams = teams };
 
             return result;
         }
