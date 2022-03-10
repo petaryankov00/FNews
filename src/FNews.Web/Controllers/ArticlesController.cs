@@ -20,6 +20,7 @@ namespace FNews.Web.Controllers
             return this.View(articles);
         }
 
+        [Authorize]
         public IActionResult UserArticles(string id,[FromQuery]int currentPage = 1)
         {
             var articles = articleService.GetById(id,currentPage);
