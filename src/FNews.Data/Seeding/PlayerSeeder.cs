@@ -1,7 +1,6 @@
 ﻿using FNews.Data.Models;
 using FNews.Global;
 using Newtonsoft.Json;
-using System.Globalization;
 
 namespace FNews.Data.Seeding
 {
@@ -16,8 +15,10 @@ namespace FNews.Data.Seeding
                 return;
             }
 
-            //await AddPlayers(dbContext, 39);
-            //await AddPlayers(dbContext, 140);
+            //await AddPlayers(dbContext, 39); DONE
+            //await AddPlayers(dbContext, 140); DONE
+            //await AddPlayers(dbContext, 61); DONE
+            //await AddPlayers(dbContext, 78);
 
         }
 
@@ -31,6 +32,11 @@ namespace FNews.Data.Seeding
             
             for (int i = 1; i <= 39; i++)
             {
+                if (i % 10 == 0)
+                {
+                    Thread.Sleep(TimeSpan.FromSeconds(60));
+                }
+
                 var response = await client.GetAsync($"https://v3.football.api-sports.io/players?league={apiLeagueId}&season=2021&page={i}");
 
                 var json = await response.Content.ReadAsStringAsync();
