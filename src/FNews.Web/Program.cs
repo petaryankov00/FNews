@@ -3,6 +3,7 @@ using FNews.Data.Common;
 using FNews.Data.Seeding;
 using FNews.Services.Articles;
 using FNews.Services.News;
+using FNews.Services.Teams;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,7 @@ builder.Services.AddRazorPages()
 builder.Services.AddTransient<IRepository, Repository>();
 builder.Services.AddTransient<IRssNewsService, RssNewsService>();
 builder.Services.AddTransient<IArticleService, ArticleService>();
+builder.Services.AddTransient<ITeamService, TeamService>();
 
 var app = builder.Build();
 

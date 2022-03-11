@@ -1,0 +1,95 @@
+﻿@using FNews.ViewModels.Teams
+@model AllTeamsViewModel
+
+@{  
+    ViewData["Title"] = "Teams";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <h3 class="mb-30 mt-5">@ViewData["Title"]</h3>
+        <form method="get">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <label asp-for="League"></label>
+                    <div class="form-select">
+                        <select asp-for="League">
+                            <option value="">All</option>
+                            @foreach (var league in Model.Leagues)
+                            {
+                                <option value="@league">@league</option>
+                            }
+                        </select>
+                    </div>
+                    <input type="submit" class="get-btn mt-3" style="margin-left:58rem" value="Search" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var team in Model.Teams)
+        {
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@team.LogoUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@team.Name</h5>
+                        <ul>
+                            <li>League: @team.LeagueName</li>
+                            <li>Stadium: @team.Stadium</li>
+                            <li>City: @team.CityName</li>
+                            <li>Manager: @team.Manager</li>
+                            <li>Year: @team.Year</li>
+                        </ul>
+                        <a asp-controller="Players" asp-action="AllByTeam" asp-route-id="@team.Id" class="genric-btn success">Players</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalTeams / AllTeamsViewModel.TeamsPerPage);
+}
+<div class="pagination-area pb-45 text-center mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="single-wrap d-flex justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-start">
+                            <li>
+                                <a class="genric-btn info radius" style="@(Model.CurrentPage == 1 ? "pointer-events:none" : string.Empty)"
+                                   asp-controller="Teams"
+                                   asp-action="All"
+                                   asp-route-currentPage="@previousPage"
+                                   asp-route-league="@Model.League"><<</a>
+                            </li>
+                            @{
+                                var shouldButtonBeDisabled = Model.CurrentPage == maxPage || !Model.Teams.Any();
+                            }
+                            <li>
+                                <a class="ml-5 genric-btn info radius" style="@(shouldButtonBeDisabled ? "pointer-events:none" : string.Empty)"
+                                   asp-controller="Teams"
+                                   asp-action="All"
+                                   asp-route-currentPage="@(Model.CurrentPage + 1)"
+                                   asp-route-league="@Model.League">>></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
