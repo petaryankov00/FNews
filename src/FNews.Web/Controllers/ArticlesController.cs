@@ -53,7 +53,7 @@ namespace FNews.Web.Controllers
 
             try
             {
-                articleService.CreateArticle(model);
+                articleService.Create(model);
             }
             catch (Exception)
             {

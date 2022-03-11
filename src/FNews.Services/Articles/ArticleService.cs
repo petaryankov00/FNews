@@ -14,7 +14,7 @@ namespace FNews.Services.Articles
             this.repo = repo;
         }
 
-        public void CreateArticle(CreateArticleInputModel model)
+        public void Create(CreateArticleInputModel model)
         {
             var team = repo.All<Team>()
                 .Where(x => x.Name == model.Team)

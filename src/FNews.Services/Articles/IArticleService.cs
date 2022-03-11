@@ -10,6 +10,6 @@ namespace FNews.Services.Articles
 
         CreateArticleInputModel GetTeamNames();
 
-        void CreateArticle(CreateArticleInputModel model);
+        void Create(CreateArticleInputModel model);
     }
 }

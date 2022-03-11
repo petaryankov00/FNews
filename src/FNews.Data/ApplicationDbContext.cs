@@ -25,7 +25,7 @@ namespace FNews.Data
 
         public DbSet<Article> Articles { get; init; }
 
-        public DbSet<TeamsArticles> TeamsNews { get; init; }
+        public DbSet<TeamsArticles> TeamsArticles { get; init; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
