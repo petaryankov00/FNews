@@ -26,7 +26,7 @@ namespace FNews.Data.Models
         [ForeignKey(nameof(AuthorId))]
         public IdentityUser Author { get; set; }
 
-        public virtual ICollection<TeamsArticles> TeamsArticles { get; init; } = new HashSet<TeamsArticles>();
+        public virtual ICollection<TeamsArticles> TeamsArticles { get; set; } = new HashSet<TeamsArticles>();
 
 
     }

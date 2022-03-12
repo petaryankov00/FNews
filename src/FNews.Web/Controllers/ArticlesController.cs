@@ -2,6 +2,7 @@
 using FNews.ViewModels.Articles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FNews.Web.Controllers
 {
@@ -74,6 +75,35 @@ namespace FNews.Web.Controllers
             }
 
             return RedirectToAction("All", "Articles");
+        }
+
+        [Authorize]
+        public IActionResult Edit(string id)
+        {
+            var articleDetails = articleService.GetDetails(id);
+
+            if (this.User.FindFirst(ClaimTypes.NameIdentifier).Value != articleDetails.AuthorId)
+            {
+                return Unauthorized();
+            }
+
+            var article = articleService.GetForEdit(articleDetails);
+
+            return View(article);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Edit(string id,CreateArticleInputModel model)
+        {
+            var isEdited = articleService.Edit(id, model);
+
+            if (!isEdited)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("Details", new { id = id });
         }
     }
 }

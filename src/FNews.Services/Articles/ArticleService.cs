@@ -2,6 +2,7 @@
 using FNews.Data.Models;
 using FNews.ViewModels.Articles;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 
 namespace FNews.Services.Articles
 {
@@ -41,8 +42,8 @@ namespace FNews.Services.Articles
         public AllArticlesViewModel GetAll(int currentPage)
         {
             var articleQuery = repo.All<Article>();
-    
-            return GetArticles(articleQuery,currentPage);
+
+            return GetArticles(articleQuery, currentPage);
         }
 
         public AllArticlesViewModel GetById(string id, int currentPage)
@@ -65,7 +66,7 @@ namespace FNews.Services.Articles
             return result;
         }
 
-        private static AllArticlesViewModel GetArticles(IQueryable<Article> articleQuery,int currentPage)
+        private static AllArticlesViewModel GetArticles(IQueryable<Article> articleQuery, int currentPage)
         {
             var totalArticles = articleQuery.Count();
 
@@ -101,11 +102,56 @@ namespace FNews.Services.Articles
                     Id = x.Id,
                     ImageUrl = x.ImageUrl,
                     AuthorName = x.Author.UserName,
-                    AuthorId = x.AuthorId
+                    AuthorId = x.AuthorId,
+                    TeamName = x.TeamsArticles.FirstOrDefault().Team.Name
                 })
                 .FirstOrDefault();
 
             return article;
+        }
+
+        public CreateArticleInputModel GetForEdit(ArticleDetailsViewModel model)
+        {
+            var article = this.GetTeamNames();
+
+            article.Header = model.Header;
+            article.Description = model.Description;
+            article.ImageUrl = model.ImageUrl;
+            article.AuthorId = model.AuthorId;
+            article.Team = model.TeamName;
+
+
+            return article;
+        }
+
+        public bool Edit(string id, CreateArticleInputModel model)
+        {
+           var article = repo.All<Article>()
+                .FirstOrDefault(x => x.Id == id);
+
+            var team = repo.All<Team>()
+                .FirstOrDefault(x => x.Name == model.Team);
+
+            if (article == null)
+            {
+                return false;
+            }
+
+            article.Header = model.Header;
+            article.Description = model.Description;
+            article.ImageUrl = model.ImageUrl;
+
+            var teamArticle = repo.All<TeamsArticles>()
+                .Where(x => x.ArticleId == id)
+                .FirstOrDefault();
+
+            repo.Remove(teamArticle);
+
+            repo.Add(new TeamsArticles { Team = team, Article = article });
+
+            repo.SaveChanges();
+
+            return true;
         }
     }
 }

@@ -2,12 +2,12 @@
 {
     public class TeamsArticles
     {
-        public string TeamId { get; init; }
+        public string TeamId { get; set; }
 
-        public virtual Team Team { get; init; }
+        public virtual Team Team { get; set; }
 
-        public string ArticleId { get; init; }
+        public string ArticleId { get; set; }
 
-        public virtual Article Article { get; init; }
+        public virtual Article Article { get; set; }
     }
 }

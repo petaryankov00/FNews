@@ -17,7 +17,7 @@ namespace FNews.ViewModels.Articles
         public string Description { get; set; }
 
         [Required]
-        public string AuthorId { get; init; }
+        public string AuthorId { get; set; }
 
         [Required]
         public string Team { get; set; }

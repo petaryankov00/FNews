@@ -16,5 +16,7 @@
 
         public string ImageUrl { get; init; }
 
+        public string TeamName { get; init; }
+
     }
 }

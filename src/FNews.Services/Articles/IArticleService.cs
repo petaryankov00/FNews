@@ -13,5 +13,9 @@ namespace FNews.Services.Articles
         CreateArticleInputModel GetTeamNames();
 
         void Create(CreateArticleInputModel model);
+
+        bool Edit(string id, CreateArticleInputModel model);
+
+        CreateArticleInputModel GetForEdit(ArticleDetailsViewModel model);
     }
 }
