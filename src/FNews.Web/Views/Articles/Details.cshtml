@@ -1,0 +1,54 @@
+﻿@using FNews.ViewModels.Articles
+@using System.Security.Claims
+
+@model ArticleDetailsViewModel
+
+@{
+    ViewData["Title"] = "Article Details";
+    var isAuthor = false;
+    if (User.Identity.IsAuthenticated)
+    {
+        if (Model.AuthorId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
+        {
+            isAuthor = true;
+        }
+    }
+}
+
+<div class="about-area mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Trending Tittle -->
+                <div class="about-right mb-90">
+                    <div class="about-img">
+                        <img src="@Model.ImageUrl" alt="">
+                    </div>
+                    <div class="section-tittle mb-30 pt-30">
+                        <h3>@Model.Header</h3>
+                    </div>
+                    <div class="about-prea">
+                        <p class="about-pera1 mb-25">
+                          @Model.Description
+                        </p>
+                        <p>
+                            <b>Published on: </b> @Model.PublishedOn
+                            <span style="float:right"><b>Author: </b> @Model.AuthorName</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            @if (isAuthor)
+            {
+                <div class="col-lg-4">
+                <div class="section-tittle mb-40">
+                    <a asp-controller="Articles" 
+                    asp-action="Edit" asp-route-id="@Model.Id"
+                    class="genric-btn large warning text-dark font-weight-bold">Edit</a>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+

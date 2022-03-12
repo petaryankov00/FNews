@@ -34,6 +34,18 @@ namespace FNews.Web.Controllers
             return View("All",articles);
         }
 
+        public IActionResult Details(string id)
+        {
+            var article = articleService.GetDetails(id);
+
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            return View(article);
+        }
+
         [Authorize]
         public IActionResult Create()
         {
