@@ -6,52 +6,7 @@
     ViewData["Title"] = "Create Article";
 }
 
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <h3 class="mb-30 mt-5">@ViewData["Title"]</h3>
-        <form asp-controller="Articles" asp-action="Create" method="post" class="form-contact contact_form">
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <label asp-for="Header"></label>
-                        <input asp-for="Header" type="text" class="form-control" id="subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Header of Article'" placeholder="Header of Article">
-                        <span asp-validation-for="Header" class="small text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-group">
-                        <label asp-for="Description"></label>
-                        <textarea asp-for="Description" class="form-control w-100" name="Description" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Article Content Here...'" placeholder="Article Content Here..."></textarea>
-                        <span asp-validation-for="Description" class="small text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label asp-for="Team"></label>
-                        <div class="form-select">
-                            <select asp-for="Team">
-                                @foreach (var team in Model.Teams)
-                                {
-                                    <option value="@team">@team</option>
-                                }
-                            </select>
-                            <span asp-validation-for="Team" class="small text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label asp-for="ImageUrl"></label>
-                        <input asp-for="ImageUrl" class="form-control" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ImageURL for Article here'" placeholder="ImageURL for Article here">
-                        <span asp-validation-for="ImageUrl" class="small text-danger"></span>
-                    </div>
-                </div>
-                <input type="text" hidden id="id" name="AuthorId" value="@this.User.FindFirst(ClaimTypes.NameIdentifier).Value" />
-            </div>
-            <button type="submit" class="button boxed-btn mb-5">Create</button>
-        </form>
-    </div>
-</div>
+<partial name="_CreateArticleFormPartial" />
 
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
